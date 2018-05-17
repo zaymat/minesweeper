@@ -123,7 +123,6 @@ const handleRightClick = (e) => {
 }
 
 const checkWin = (grid) => {
-    console.log(grid["hidden_cells"], grid["nb_bomb"])
     return (grid["hidden_cells"] == grid["nb_bomb"]);
 }
 
