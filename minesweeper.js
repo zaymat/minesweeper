@@ -63,9 +63,13 @@ const displayGrid = (grid) => {
             if(cell[0] == "hidden"){
                 html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"flagged\"></td>"
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" class=\"flagged\"><img src=\"flag.png\" class=\"image\"></img></td>"
             }else{
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"discovered\">"+ cell[1] + "</td>"
+                if(cell[1] == -1){
+                    html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:return false;\" class=\"discovered\"><img src=\"bomb.png\" class=\"image\"></img></td>"
+                }else{
+                    html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"discovered\">"+ cell[1] + "</td>"
+                }
             }
         }
         html += "</tr>";
