@@ -55,16 +55,16 @@ const displayGrid = (grid) => {
 
     var html = "<table>";
 
-    for(i=0; i<x; i++){
+    for(j=0; j<y; j++){
         gridHTML.innerHTML += "<tr>";
-        for(j=0; j<y; j++){
+        for(i=0; i<x; i++){
             var cell = grid[i][j];
             if(cell[0] == "hidden"){
-                html += "<td class=\"hidden\"></td>";
+                html += "<td onclick=\"handleEvent(this)\" class=\"hidden\">"+ cell[1] + "</td>";
             }else if(cell[0] == "flagged"){
-                html += "<td class=\"flagged\"></td>";
+                html += "<td onclick=\"handleEvent(this)\" class=\"flagged\">"+ cell[1] + "</td>";
             }else{
-                html += "<td class=\"discovered\"></td>";
+                html += "<td onclick=\"handleEvent(this)\" class=\"discovered\">"+ cell[1] + "</td>";
             }
         }
         html += "</tr>";
@@ -73,6 +73,12 @@ const displayGrid = (grid) => {
     gridHTML.innerHTML = html;
 }
 
+const handleEvent = (e) => {
+    console.log("event");
+}
+
 
 var grid = createGrid(10,10);
+placeBombs(grid, 10);
+
 displayGrid(grid);
