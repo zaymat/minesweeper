@@ -60,11 +60,11 @@ const displayGrid = (grid) => {
         for(i=0; i<x; i++){
             var cell = grid[i][j];
             if(cell[0] == "hidden"){
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"hidden\"></td>";
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"flagged\"></td>"
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"flagged\"></td>"
             }else{
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"discovered\">"+ cell[1] + "</td>"
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"discovered\">"+ cell[1] + "</td>"
             }
         }
         html += "</tr>";
@@ -84,16 +84,29 @@ const discover = (grid, x, y) => {
     }
 }
 
-const handleEvent = (e) => {
+const handleLeftClick = (e) => {
     var coor = JSON.parse(e.id);
     var x = coor["x"];
     var y = coor["y"];
+
     grid[x][y][0] = "discovered";
     if(grid[x][y][1] == 0){
         discover(grid, x, y);
     }else if(grid[x][y][1] == -1){
         var loose = document.getElementById("score");
         loose.innerHTML = "You loose !";
+    }
+    displayGrid(grid);
+}
+
+const handleRightClick = (e) => {
+    var coor = JSON.parse(e.id);
+    var x = coor["x"];
+    var y = coor["y"];
+    if(grid[x][y][0] == "flagged"){
+        grid[x][y][0] = "hidden";
+    }else{
+        grid[x][y][0] = "flagged";
     }
     displayGrid(grid);
 }
