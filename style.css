@@ -1,8 +1,16 @@
+table{
+    display: grid;
+    grid-template-areas: "a a";
+    font-size: small;
+}
+
 .hidden{
     width: 3vh;
     background-color: lightgray;
     border-style: solid;
     border-width: 1px;
+    text-align: center;
+    padding: 0px;
 }
 
 .hidden:after{
@@ -11,30 +19,23 @@
     padding-bottom: 100%;
 }
 
+
 .flagged{
-    width: 2vw;
-    height: 2vh;
+    width: 3vh;
+    height: 3vh;
     background-color: lightcoral;
     border-style: solid;
     border-width: 1px;
-}
-
-.flagged:after{
-    content: "";
-    display: block;
-    padding-bottom: 100%;
+    text-align: center;
+    padding: 0px;
 }
 
 .discovered{
-    width: 2vw;
-    height: 2vh;
+    width: 3vh;
+    height: 3vh;
     background-color: lightgreen;
     border-style: solid;
     border-width: 1px;
-}
-
-.discovered:after{
-    content: "";
-    display: block;
-    padding-bottom: 100%;
+    text-align: center;
+    padding: 0px;
 }

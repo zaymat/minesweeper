@@ -60,9 +60,9 @@ const displayGrid = (grid) => {
         for(i=0; i<x; i++){
             var cell = grid[i][j];
             if(cell[0] == "hidden"){
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"hidden\">"+ cell[1] + "</td>";
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"flagged\">"+ cell[1] + "</td>"
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"flagged\"></td>"
             }else{
                 html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' onclick=\"handleEvent(this)\" class=\"discovered\">"+ cell[1] + "</td>"
             }
@@ -73,12 +73,28 @@ const displayGrid = (grid) => {
     gridHTML.innerHTML = html;
 }
 
+const discover = (grid, x, y) => {
+    pile = neighboors(grid, x, y);
+    while(pile.length){
+        var cell = pile.pop();
+        if(grid[cell[0]][cell[1]][1] == 0 && grid[cell[0]][cell[1]][0] == "hidden"){
+            pile = pile.concat(neighboors(grid, cell[0], cell[1]));
+        }
+        grid[cell[0]][cell[1]][0] = "discovered";
+    }
+}
+
 const handleEvent = (e) => {
     var coor = JSON.parse(e.id);
     var x = coor["x"];
     var y = coor["y"];
     grid[x][y][0] = "discovered";
-    console.log(grid[x][y]);
+    if(grid[x][y][1] == 0){
+        discover(grid, x, y);
+    }else if(grid[x][y][1] == -1){
+        var loose = document.getElementById("score");
+        loose.innerHTML = "You loose !";
+    }
     displayGrid(grid);
 }
 
