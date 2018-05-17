@@ -1,4 +1,4 @@
-const createGrid = (x,y) => {
+const createGrid = (x,y,n) => {
     var grid = [];
     for(i=0; i<x; i++){
         grid[i] = [];
@@ -6,7 +6,8 @@ const createGrid = (x,y) => {
             grid[i][j] = ["hidden", 0];
         }
     }
-    return grid;
+    placeBombs(grid, n);
+    return {"grid": grid, "nb_bomb": n, "hidden_cells": x*y};
 }
 
 const placeBombs = (grid, n) => {
@@ -74,13 +75,16 @@ const displayGrid = (grid) => {
 }
 
 const discover = (grid, x, y) => {
-    pile = neighboors(grid, x, y);
+    pile = neighboors(grid["grid"], x, y);
     while(pile.length){
         var cell = pile.pop();
-        if(grid[cell[0]][cell[1]][1] == 0 && grid[cell[0]][cell[1]][0] == "hidden"){
-            pile = pile.concat(neighboors(grid, cell[0], cell[1]));
+        if(grid["grid"][cell[0]][cell[1]][1] == 0 && grid["grid"][cell[0]][cell[1]][0] == "hidden"){
+            pile = pile.concat(neighboors(grid["grid"], cell[0], cell[1]));
         }
-        grid[cell[0]][cell[1]][0] = "discovered";
+        if(grid["grid"][cell[0]][cell[1]][0] == "hidden"){
+            grid["hidden_cells"] -= 1;
+        }
+        grid["grid"][cell[0]][cell[1]][0] = "discovered";
     }
 }
 
@@ -89,32 +93,39 @@ const handleLeftClick = (e) => {
     var x = coor["x"];
     var y = coor["y"];
 
-    if(grid[x][y][0] != "flagged"){
-        grid[x][y][0] = "discovered";
+    if(grid["grid"][x][y][0] != "flagged"){
+        grid["grid"][x][y][0] = "discovered";
+        grid["hidden_cells"] -= 1;
     }
-    if(grid[x][y][1] == 0){
+    if(grid["grid"][x][y][1] == 0){
         discover(grid, x, y);
-    }else if(grid[x][y][1] == -1){
+    }else if(grid["grid"][x][y][1] == -1){
         var loose = document.getElementById("score");
         loose.innerHTML = "You loose !";
     }
-    displayGrid(grid);
+    if(checkWin(grid)){
+        var win = document.getElementById("score");
+        win.innerHTML = "You Win !";
+    }
+    displayGrid(grid["grid"]);
 }
 
 const handleRightClick = (e) => {
     var coor = JSON.parse(e.id);
     var x = coor["x"];
     var y = coor["y"];
-    if(grid[x][y][0] == "flagged"){
-        grid[x][y][0] = "hidden";
+    if(grid["grid"][x][y][0] == "flagged"){
+        grid["grid"][x][y][0] = "hidden";
     }else{
-        grid[x][y][0] = "flagged";
+        grid["grid"][x][y][0] = "flagged";
     }
-    displayGrid(grid);
+    displayGrid(grid["grid"]);
 }
 
+const checkWin = (grid) => {
+    console.log(grid["hidden_cells"], grid["nb_bomb"])
+    return (grid["hidden_cells"] == grid["nb_bomb"]);
+}
 
-var grid = createGrid(10,10);
-placeBombs(grid, 10);
-
-displayGrid(grid);
+var grid = createGrid(10,10,10);
+displayGrid(grid["grid"]);
