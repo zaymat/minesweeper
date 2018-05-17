@@ -89,7 +89,9 @@ const handleLeftClick = (e) => {
     var x = coor["x"];
     var y = coor["y"];
 
-    grid[x][y][0] = "discovered";
+    if(grid[x][y][0] != "flagged"){
+        grid[x][y][0] = "discovered";
+    }
     if(grid[x][y][1] == 0){
         discover(grid, x, y);
     }else if(grid[x][y][1] == -1){
