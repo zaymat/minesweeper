@@ -14,7 +14,7 @@
 .flagged{
     width: 2vw;
     height: 2vh;
-    background-color: lightgray;
+    background-color: lightcoral;
     border-style: solid;
     border-width: 1px;
 }
@@ -28,7 +28,7 @@
 .discovered{
     width: 2vw;
     height: 2vh;
-    background-color: lightgray;
+    background-color: lightgreen;
     border-style: solid;
     border-width: 1px;
 }
