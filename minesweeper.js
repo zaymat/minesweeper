@@ -78,6 +78,35 @@ const displayGrid = (grid) => {
     gridHTML.innerHTML = html;
 }
 
+const displayStaticGrid = (grid) => {
+    var gridHTML = document.getElementById("grid");
+    var x = grid.length;
+    var y = grid[0].length;
+
+    var html = "<table>";
+
+    for(j=0; j<y; j++){
+        gridHTML.innerHTML += "<tr>";
+        for(i=0; i<x; i++){
+            var cell = grid[i][j];
+            if(cell[0] == "hidden"){
+                html += "<td oncontextmenu=\"javascript:return false;\" class=\"hidden\"></td>";
+            }else if(cell[0] == "flagged"){
+                html += "<td oncontextmenu=\"javascript:return false;\" class=\"flagged\"><img src=\"flag.png\" class=\"image\"></img></td>"
+            }else{
+                if(cell[1] == -1){
+                    html += "<td oncontextmenu=\"javascript:return false;\" class=\"discovered\"><img src=\"bomb.png\" class=\"image\"></img></td>"
+                }else{
+                    html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:return false;\" class=\"discovered\">"+ cell[1] + "</td>"
+                }
+            }
+        }
+        html += "</tr>";
+    } 
+    html += "</table>"
+    gridHTML.innerHTML = html;
+}
+
 const discover = (grid, x, y) => {
     pile = neighboors(grid["grid"], x, y);
     while(pile.length){
@@ -100,18 +129,21 @@ const handleLeftClick = (e) => {
     if(grid["grid"][x][y][0] != "flagged"){
         grid["grid"][x][y][0] = "discovered";
         grid["hidden_cells"] -= 1;
+        if(grid["grid"][x][y][1] == 0){
+            discover(grid, x, y);
+            displayGrid(grid["grid"]);
+        }else if(grid["grid"][x][y][1] == -1){
+            var loose = document.getElementById("score");
+            loose.innerHTML = "You loose !";
+            displayStaticGrid(grid["grid"]);
+        }else if(checkWin(grid)){
+            var win = document.getElementById("score");
+            win.innerHTML = "You Win !";
+            displayStaticGrid(grid["grid"]);
+        }else{
+            displayGrid(grid["grid"]);
+        }
     }
-    if(grid["grid"][x][y][1] == 0){
-        discover(grid, x, y);
-    }else if(grid["grid"][x][y][1] == -1){
-        var loose = document.getElementById("score");
-        loose.innerHTML = "You loose !";
-    }
-    if(checkWin(grid)){
-        var win = document.getElementById("score");
-        win.innerHTML = "You Win !";
-    }
-    displayGrid(grid["grid"]);
 }
 
 const handleRightClick = (e) => {
