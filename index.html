@@ -28,7 +28,7 @@
     <title>Minesweeper</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">Minesweeper</span>
     </nav>
     <ul class="nav nav-tabs">
@@ -40,17 +40,17 @@
         </li>
     </ul>
 
-    <div class="centered">
+    <div id="score" class="centered m-2 h1">
+
+    </div>
+
+    <div class="centered m-5">
         <div id="grid">
 
         </div>
     </div>
 
-    <div id="score">
-
-    </div>
-
-    <div class="centered">
+    <div class="centered m-2">
         <button type="button" class="btn btn-primary" onclick="newGame(10,10,10)">New Game</button>
     </div>
 
