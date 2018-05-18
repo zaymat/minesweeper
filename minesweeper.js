@@ -173,13 +173,23 @@ const checkWin = (grid) => {
     return (grid["hidden_cells"] == grid["nb_bomb"]);
 }
 
-const newGame = (n, m, bombs) => {
+const newGame = () => {
+    var conf = JSON.parse(sessionStorage.getItem("conf"));
+    if(conf){
+        var n = conf["n"];
+        var m = conf["m"];
+        var bombs = conf["bombs"];
+
+        var grid = createGrid(n,m,bombs);
+    }else{
+        var grid = createGrid(9,9,10);
+    }
     var score = document.getElementById("score");
     score.innerHTML = "";
-    grid = createGrid(n,m,bombs);
     displayGrid(grid["grid"]);
-
+    return grid;
 }
 
-var grid = createGrid(10,10,10);
-displayGrid(grid["grid"]);
+
+var grid;
+grid = newGame();
