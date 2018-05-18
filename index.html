@@ -28,12 +28,32 @@
     <title>Minesweeper</title>
 </head>
 <body>
-    <div id="grid">
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Minesweeper</span>
+    </nav>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="index.html">Game</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="config.html">Configuration</a>
+        </li>
+    </ul>
 
+    <div class="centered">
+        <div id="grid">
+
+        </div>
     </div>
+
     <div id="score">
 
     </div>
+
+    <div class="centered">
+        <button type="button" class="btn btn-primary" onclick="newGame(10,10,10)">New Game</button>
+    </div>
+
     <script src="minesweeper.js"></script>
 </body>
 </html>
