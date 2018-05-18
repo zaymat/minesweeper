@@ -173,5 +173,13 @@ const checkWin = (grid) => {
     return (grid["hidden_cells"] == grid["nb_bomb"]);
 }
 
+const newGame = (n, m, bombs) => {
+    var score = document.getElementById("score");
+    score.innerHTML = "";
+    grid = createGrid(n,m,bombs);
+    displayGrid(grid["grid"]);
+
+}
+
 var grid = createGrid(10,10,10);
 displayGrid(grid["grid"]);
