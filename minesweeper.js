@@ -1,5 +1,5 @@
 const createGrid = (x,y,n) => {
-    var grid = [];
+    let grid = [];
     for(i=0; i<x; i++){
         grid[i] = [];
         for(j=0; j<y; j++){
@@ -11,9 +11,9 @@ const createGrid = (x,y,n) => {
 }
 
 const placeBombs = (grid, n) => {
-    var remain = n;
-    var x = grid.length;
-    var y = grid[0].length;
+    let remain = n;
+    let x = grid.length;
+    let y = grid[0].length;
 
     while(remain > 0){
         randX = Math.floor(Math.random() * x);
@@ -28,9 +28,9 @@ const placeBombs = (grid, n) => {
 }
 
 const neighboors = (grid, x, y) => {
-    var neighboors = []
-    var n = grid.length;
-    var m = grid[0].length;
+    let neighboors = []
+    let n = grid.length;
+    let m = grid[0].length;
 
     for (i=-1; i<= 1; i++){
         for (j=-1; j<= 1; j++){
@@ -43,23 +43,23 @@ const neighboors = (grid, x, y) => {
 }
 
 const updateNeighboors = (grid, x, y) => {
-    var neighs = neighboors(grid, x, y);
+    let neighs = neighboors(grid, x, y);
     for(neigh of neighs){
         grid[neigh[0]][neigh[1]][1] += 1;
     }
 }
 
 const displayGrid = (grid) => {
-    var gridHTML = document.getElementById("grid");
-    var x = grid.length;
-    var y = grid[0].length;
+    let gridHTML = document.getElementById("grid");
+    let x = grid.length;
+    let y = grid[0].length;
 
-    var html = "<table>";
+    let html = "<table>";
 
     for(j=0; j<y; j++){
         gridHTML.innerHTML += "<tr>";
         for(i=0; i<x; i++){
-            var cell = grid[i][j];
+            let cell = grid[i][j];
             if(cell[0] == "hidden"){
                 html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
@@ -85,16 +85,16 @@ const displayGrid = (grid) => {
 }
 
 const displayStaticGrid = (grid) => {
-    var gridHTML = document.getElementById("grid");
-    var x = grid.length;
-    var y = grid[0].length;
+    let gridHTML = document.getElementById("grid");
+    let x = grid.length;
+    let y = grid[0].length;
 
-    var html = "<table>";
+    let html = "<table>";
 
     for(j=0; j<y; j++){
         gridHTML.innerHTML += "<tr>";
         for(i=0; i<x; i++){
-            var cell = grid[i][j];
+            let cell = grid[i][j];
             if(cell[0] == "hidden"){
                 html += "<td oncontextmenu=\"javascript:return false;\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
@@ -122,7 +122,7 @@ const displayStaticGrid = (grid) => {
 const discover = (grid, x, y) => {
     pile = neighboors(grid["grid"], x, y);
     while(pile.length){
-        var cell = pile.pop();
+        let cell = pile.pop();
         if(grid["grid"][cell[0]][cell[1]][1] == 0 && grid["grid"][cell[0]][cell[1]][0] == "hidden"){
             pile = pile.concat(neighboors(grid["grid"], cell[0], cell[1]));
         }
@@ -134,9 +134,9 @@ const discover = (grid, x, y) => {
 }
 
 const handleLeftClick = (e) => {
-    var coor = JSON.parse(e.id);
-    var x = coor["x"];
-    var y = coor["y"];
+    let coor = JSON.parse(e.id);
+    let x = coor["x"];
+    let y = coor["y"];
 
     grid["grid"][x][y][0] = "discovered";
     grid["hidden_cells"] -= 1;
@@ -145,11 +145,11 @@ const handleLeftClick = (e) => {
         discover(grid, x, y);
         displayGrid(grid["grid"]);
     }else if(grid["grid"][x][y][1] == -1){
-        var loose = document.getElementById("score");
+        let loose = document.getElementById("score");
         loose.innerHTML = "You loose !";
         displayStaticGrid(grid["grid"]);
     }else if(checkWin(grid)){
-        var win = document.getElementById("score");
+        let win = document.getElementById("score");
         win.innerHTML = "You Win !";
         displayStaticGrid(grid["grid"]);
     }else{
@@ -158,9 +158,9 @@ const handleLeftClick = (e) => {
 }
 
 const handleRightClick = (e) => {
-    var coor = JSON.parse(e.id);
-    var x = coor["x"];
-    var y = coor["y"];
+    let coor = JSON.parse(e.id);
+    let x = coor["x"];
+    let y = coor["y"];
     if(grid["grid"][x][y][0] == "flagged"){
         grid["grid"][x][y][0] = "hidden";
     }else{
@@ -174,22 +174,23 @@ const checkWin = (grid) => {
 }
 
 const newGame = () => {
-    var conf = JSON.parse(sessionStorage.getItem("conf"));
+    let conf = JSON.parse(sessionStorage.getItem("conf"));
+    let grid;
     if(conf){
-        var n = conf["n"];
-        var m = conf["m"];
-        var bombs = conf["bombs"];
+        let n = conf["n"];
+        let m = conf["m"];
+        let bombs = conf["bombs"];
 
-        var grid = createGrid(n,m,bombs);
+        grid = createGrid(n,m,bombs);
     }else{
-        var grid = createGrid(9,9,10);
+        grid = createGrid(9,9,10);
     }
-    var score = document.getElementById("score");
+    let score = document.getElementById("score");
     score.innerHTML = "";
     displayGrid(grid["grid"]);
     return grid;
 }
 
 
-var grid;
+let grid;
 grid = newGame();
