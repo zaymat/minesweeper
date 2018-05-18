@@ -7,7 +7,7 @@ table{
 .hidden{
     width: 3vh;
     height: 3vh;
-    background-color: lightgray;
+    background-color: rgb(139, 139, 139);
     border-style: solid;
     border-width: 1px;
     text-align: center;
@@ -19,7 +19,6 @@ table{
     display: block;
     padding-bottom: 100%;
 }
-
 
 .flagged{
     width: 3vh;
@@ -34,9 +33,10 @@ table{
 .discovered{
     width: 3vh;
     height: 3vh;
-    background-color: lightgreen;
+    background-color: lightgray;
     border-style: solid;
     border-width: 1px;
+    border-color: black;
     text-align: center;
     padding: 0px;
 }
@@ -46,4 +46,45 @@ table{
     height: 2.5vh;
     margin: 0px;
     padding: 0px;
+}
+
+.number0:after {
+    padding: 100%;
+}
+
+.number1 {
+    color: blue;
+}
+
+.number2 {
+    color: green;
+}
+
+.number3 {
+    color: red;
+}
+
+.number4 {
+    color: purple;
+}
+
+.number5 {
+    color: darkblue;
+}
+
+.number6 {
+    color: darkgreen;
+}
+
+.number7 {
+    color: darkred;
+}
+
+.number8 {
+    color: darkviolet;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
 }
