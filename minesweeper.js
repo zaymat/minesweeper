@@ -17,7 +17,7 @@ const placeBombs = (grid, n) => {
 
     while(remain > 0){
         randX = Math.floor(Math.random() * x);
-        randY = Math.floor(Math.random() * x);
+        randY = Math.floor(Math.random() * y);
 
         if(grid[randX][randY][1] != -1){
             grid[randX][randY][1] = -1;
