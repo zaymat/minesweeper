@@ -141,6 +141,12 @@ const handleLeftClick = (e) => {
     grid["grid"][x][y][0] = "discovered";
     grid["hidden_cells"] -= 1;
 
+    if(timer == 0){
+        let d = new Date();
+        timer = d.getTime();
+        timerInterval = setInterval(updateTimer, 10);
+    }
+
     if(grid["grid"][x][y][1] == 0){
         discover(grid, x, y);
         displayGrid(grid["grid"]);
@@ -148,10 +154,26 @@ const handleLeftClick = (e) => {
         let loose = document.getElementById("score");
         loose.innerHTML = "You loose !";
         displayStaticGrid(grid["grid"]);
+
+        let d = new Date();
+        t = d.getTime();
+        let time = document.getElementById("timer");
+        time.innerHTML = Math.round((t-timer)/10)/100 + " sec";
+        timer = 0;
+        clearInterval(timerInterval);
+
     }else if(checkWin(grid)){
         let win = document.getElementById("score");
         win.innerHTML = "You Win !";
         displayStaticGrid(grid["grid"]);
+
+        let d = new Date();
+        t = d.getTime();
+        let time = document.getElementById("timer");
+        time.innerHTML = Math.round((t-timer)/10)/100 + " sec";
+        timer = 0;
+        clearInterval(timerInterval);
+        
     }else{
         displayGrid(grid["grid"]);
     }
@@ -161,6 +183,13 @@ const handleRightClick = (e) => {
     let coor = JSON.parse(e.id);
     let x = coor["x"];
     let y = coor["y"];
+
+    if(timer == 0){
+        let d = new Date();
+        timer = d.getTime();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
     if(grid["grid"][x][y][0] == "flagged"){
         grid["grid"][x][y][0] = "hidden";
     }else{
@@ -187,10 +216,21 @@ const newGame = () => {
     }
     let score = document.getElementById("score");
     score.innerHTML = "";
+    let timer = document.getElementById("timer");
+    timer.innerHTML = "";
     displayGrid(grid["grid"]);
     return grid;
 }
 
+const updateTimer = () => {
+    let d = new Date();
+    t = d.getTime();
+    let time = document.getElementById("timer");
+    time.innerHTML = Math.round((t-timer)/1000) + " sec";
+}
 
 let grid;
 grid = newGame();
+
+let timer = 0;
+let timerInterval;
