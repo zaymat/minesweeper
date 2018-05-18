@@ -1,0 +1,1 @@
+document.cookie = "grid_n=10; grid_m=10; grid_bombs=10";
