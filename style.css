@@ -89,3 +89,23 @@ table{
     display: flex;
     justify-content: center;
 }
+
+.timer {
+    width: auto;
+    color: red;
+    font-family: digit, Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    box-shadow: inset 3px 3px rgb(230,230,230), inset -3px -3px darkgray;
+    background-color: lightgray;
+    padding-left: 1vh;
+    padding-right: 2vh;
+}
+
+.timer:active{
+    box-shadow: inset 1px 1px rgb(230,230,230), inset -1px -1px darkgray;
+}
+
+@font-face {
+    font-family: digit;
+    src: url(fonts/Digit.TTF);
+}

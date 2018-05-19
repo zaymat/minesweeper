@@ -205,6 +205,7 @@ const checkWin = (grid) => {
 const newGame = () => {
     let conf = JSON.parse(sessionStorage.getItem("conf"));
     timer = 0;
+    clearInterval(timerInterval);
 
     if(conf){
         let n = conf["n"];
@@ -218,7 +219,7 @@ const newGame = () => {
     let score = document.getElementById("score");
     score.innerHTML = "";
     let time = document.getElementById("timer");
-    time.innerHTML = "";
+    time.innerHTML = "000";
     displayGrid(grid["grid"]);
 }
 
@@ -226,7 +227,7 @@ const updateTimer = () => {
     let d = new Date();
     t = d.getTime();
     let time = document.getElementById("timer");
-    time.innerHTML = Math.round((t-timer)/1000) + " sec";
+    time.innerHTML = String("00" + Math.round((t-timer)/1000)).slice(-3);
 }
 
 let grid;
