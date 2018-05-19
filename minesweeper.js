@@ -152,7 +152,8 @@ const handleLeftClick = (e) => {
         displayGrid(grid["grid"]);
     }else if(grid["grid"][x][y][1] == -1){
         let loose = document.getElementById("score");
-        loose.innerHTML = "You loose !";
+        score.innerHTML = "YOU LOOSE";
+        score.style.display = "block";
         displayStaticGrid(grid["grid"]);
 
         let d = new Date();
@@ -163,8 +164,10 @@ const handleLeftClick = (e) => {
         clearInterval(timerInterval);
 
     }else if(checkWin(grid)){
-        let win = document.getElementById("score");
-        win.innerHTML = "You Win !";
+        let score = document.getElementById("score");
+        score.innerHTML = "YOU WIN";
+        score.style.display = "block";
+
         displayStaticGrid(grid["grid"]);
 
         let d = new Date();
@@ -218,6 +221,7 @@ const newGame = () => {
     }
     let score = document.getElementById("score");
     score.innerHTML = "";
+    score.style.display = "none";
     let time = document.getElementById("timer");
     time.innerHTML = "000";
     displayGrid(grid["grid"]);

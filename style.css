@@ -113,3 +113,19 @@ table{
     font-family: digit;
     src: url(fonts/Digit.TTF);
 }
+
+.score {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 50vh;
+    width: 40vh; /* Full width */
+    overflow: auto; /* Enable scroll if needed */
+
+    background-color:lightgray;
+    color: red;
+    font-family: digit, Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    box-shadow: inset 3px 3px rgb(230,230,230),inset  -3px -3px darkgray;
+    text-align: center;
+}
