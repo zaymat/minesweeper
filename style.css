@@ -21,6 +21,10 @@ table{
     padding-bottom: 100%;
 }
 
+.hidden:active{
+    box-shadow: inset 1px 1px white, inset -1px -1px darkgray;
+}
+
 .flagged{
     width: 3vh;
     height: 3vh;
