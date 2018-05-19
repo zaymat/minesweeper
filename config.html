@@ -46,7 +46,7 @@
     </ul>
     <div class="row">
         <div class="col-md-4 m-5">
-            <form id="difficulty" onsubmit="setConfig()">
+            <form id="difficulty" onsubmit="setConfig(); return false" >
                 <div class="form-group">
                     <div class="h1">Standard Game</div>
                     <div class="ml-3">
@@ -74,7 +74,7 @@
             </form>
         </div>
         <div class="col-md-4 m-5">
-            <form id="customConf" onsubmit="return setCustomConfig()" novalidate>
+            <form id="customConf" onsubmit="setCustomConfig(); return false" novalidate>
                 <div class="h1">Custom Game</div>
                 <div class="form-group">
                     <label for="nbRows">Numbers of Rows</label>

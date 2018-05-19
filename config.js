@@ -32,26 +32,23 @@ const setCustomConfig = () => {
         document.getElementById("nbCols").className = "form-control is-valid";
     }else{
         document.getElementById("nbCols").className = "form-control is-invalid";
-        return false;
+        return
     }
 
     if(m > 1 && m <= 24){
         document.getElementById("nbRows").className = "form-control is-valid";
     }else{
         document.getElementById("nbRows").className = "form-control is-invalid";
-        return false;
+        return 
     }
 
     if(bombs > 1 && bombs < n*m){
         sessionStorage.setItem("conf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
         sessionStorage.setItem("lastSubmittedCustomConf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
         document.getElementById("nbBombs").classList = "form-control is-valid";
-        return true;
     }else{
         document.getElementById("nbBombs").className = "form-control is-invalid";
-        return false;
     }
- 
 }
 
 const displayLastConf = () => {
