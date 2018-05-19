@@ -63,11 +63,11 @@ const displayGrid = (grid) => {
             if(cell[0] == "hidden"){
                 html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" onclick=\"handleLeftClick(this)\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
-                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" class=\"flagged\"><img src=\"flag.png\" class=\"image\"></img></td>"
+                html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:handleRightClick(this);return false;\" class=\"flagged\"><img src=\"assets/flag.png\" class=\"image\"></img></td>"
             }else{
                 switch(cell[1]){
                     case -1:
-                        html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:return false;\" class=\"discovered\"><img src=\"bomb.png\" class=\"image\"></img></td>"
+                        html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:return false;\" class=\"discovered\"><img src=\"assets/bomb.png\" class=\"image\"></img></td>"
                         break;
                     case 0:
                         html += "<td id=\'{" + "\"x\":" + i + ", \"y\":" + j + "}\' oncontextmenu=\"javascript:return false;\" class=\"discovered number0\"></td>"
@@ -98,11 +98,11 @@ const displayStaticGrid = (grid) => {
             if(cell[0] == "hidden"){
                 html += "<td oncontextmenu=\"javascript:return false;\" class=\"hidden\"></td>";
             }else if(cell[0] == "flagged"){
-                html += "<td oncontextmenu=\"javascript:return false;\" class=\"flagged\"><img src=\"flag.png\" class=\"image\"></img></td>"
+                html += "<td oncontextmenu=\"javascript:return false;\" class=\"flagged\"><img src=\"assets/flag.png\" class=\"image\"></img></td>"
             }else{
                 switch(cell[1]){
                     case -1:
-                        html += "<td oncontextmenu=\"javascript:return false;\" class=\"discovered\"><img src=\"bomb.png\" class=\"image\"></img></td>"
+                        html += "<td oncontextmenu=\"javascript:return false;\" class=\"discovered\"><img src=\"assets/bomb.png\" class=\"image\"></img></td>"
                         break;
                     case 0:
                         html += "<td oncontextmenu=\"javascript:return false;\" class=\"discovered number0\"></td>"
