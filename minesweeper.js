@@ -204,7 +204,8 @@ const checkWin = (grid) => {
 
 const newGame = () => {
     let conf = JSON.parse(sessionStorage.getItem("conf"));
-    let grid;
+    timer = 0;
+
     if(conf){
         let n = conf["n"];
         let m = conf["m"];
@@ -216,10 +217,9 @@ const newGame = () => {
     }
     let score = document.getElementById("score");
     score.innerHTML = "";
-    let timer = document.getElementById("timer");
-    timer.innerHTML = "";
+    let time = document.getElementById("timer");
+    time.innerHTML = "";
     displayGrid(grid["grid"]);
-    return grid;
 }
 
 const updateTimer = () => {
@@ -230,7 +230,8 @@ const updateTimer = () => {
 }
 
 let grid;
-grid = newGame();
-
-let timer = 0;
+let timer;
+timer = 0;
 let timerInterval;
+
+newGame();
