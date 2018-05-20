@@ -118,7 +118,7 @@ table .grid{
     display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    top: 50vh;
+    top: 30vh;
     width: 40vh; /* Full width */
     overflow: auto; /* Enable scroll if needed */
 
