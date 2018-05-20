@@ -249,7 +249,7 @@ const newGame = () => {
     timer = 0;
     clearInterval(timerInterval);
 
-    if(conf){
+    if(conf != null){
         let n = conf["n"];
         let m = conf["m"];
         let bombs = conf["bombs"];
@@ -257,6 +257,7 @@ const newGame = () => {
         grid = createGrid(n,m,bombs);
     }else{ // default value 
         grid = createGrid(9,9,10);
+        localStorage.setItem("conf", JSON.stringify({"n": 9, "m": 9, "bombs": 10}));
     }
     // Reset score and timer
     let score = document.getElementById("score");
