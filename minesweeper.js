@@ -159,7 +159,7 @@ const handleLeftClick = (e) => {
         let d = new Date();
         t = d.getTime();
         let time = document.getElementById("timer");
-        time.innerHTML = Math.round((t-timer)/10)/100 + " sec";
+        time.innerHTML = String("00" + Math.round((t-timer)/1000)).slice(-3);
         timer = 0;
         clearInterval(timerInterval);
 
@@ -173,7 +173,7 @@ const handleLeftClick = (e) => {
         let d = new Date();
         t = d.getTime();
         let time = document.getElementById("timer");
-        time.innerHTML = Math.round((t-timer)/10)/100 + " sec";
+        time.innerHTML = String("00" + Math.round((t-timer)/1000)).slice(-3);
         clearInterval(timerInterval);
 
         updateScore(Math.round((t-timer)/10)/100);
