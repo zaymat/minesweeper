@@ -54,7 +54,7 @@ const displayGrid = (grid) => {
     let x = grid.length;
     let y = grid[0].length;
 
-    let html = "<table>";
+    let html = "<table class=\"grid\">";
 
     for(j=0; j<y; j++){
         gridHTML.innerHTML += "<tr>";
@@ -89,7 +89,7 @@ const displayStaticGrid = (grid) => {
     let x = grid.length;
     let y = grid[0].length;
 
-    let html = "<table>";
+    let html = "<table class=\"grid\">";
 
     for(j=0; j<y; j++){
         gridHTML.innerHTML += "<tr>";
@@ -174,8 +174,10 @@ const handleLeftClick = (e) => {
         t = d.getTime();
         let time = document.getElementById("timer");
         time.innerHTML = Math.round((t-timer)/10)/100 + " sec";
-        timer = 0;
         clearInterval(timerInterval);
+
+        updateScore(Math.round((t-timer)/10)/100);
+        timer = 0;
         
     }else{
         displayGrid(grid["grid"]);
@@ -232,6 +234,36 @@ const updateTimer = () => {
     t = d.getTime();
     let time = document.getElementById("timer");
     time.innerHTML = String("00" + Math.round((t-timer)/1000)).slice(-3);
+}
+
+const updateScore = (score) => {
+    let scores = JSON.parse(localStorage.getItem("bestScores"));
+    if(scores == null){
+        scores = {"easy": [], "normal": [], "hard": []};
+    }
+    let conf = JSON.parse(localStorage.getItem("conf"));
+
+    if(conf["n"] == 9 &&  conf["m"] == 9 && conf["bombs"] == 10){
+        scores["easy"] = insertScore(scores["easy"], score).slice(0, 9);
+    }else if(conf["n"] == 16 &&  conf["m"] == 16 && conf["bombs"] == 40){
+        scores["normal"] = insertScore(scores["normal"], score).slice(0, 9);
+    }else if(conf["n"] == 30 &&  conf["m"] == 16 && conf["bombs"] == 99){
+        scores["hard"] = insertScore(scores["hard"], score).slice(0, 9);
+    }
+    localStorage.setItem("bestScores", JSON.stringify(scores));
+}
+
+const insertScore = (list, score) => {
+    if(list.length == 0){
+        return [score];
+    }else{
+        let worst = list.pop();
+        if(score < worst){
+            return insertScore(list,score).concat(worst);
+        }else{
+            return list.concat(worst).concat(score);
+        }
+    }
 }
 
 let grid;

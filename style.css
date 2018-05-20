@@ -1,4 +1,4 @@
-table{
+table .grid{
     display: grid;
     grid-template-areas: "a a";
     font-size: small;
