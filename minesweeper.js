@@ -208,6 +208,12 @@ const checkWin = (grid) => {
 }
 
 const newGame = () => {
+    let scores = JSON.parse(localStorage.getItem("bestScores"));
+    if(scores == null){
+        scores = {"easy": [], "normal": [], "hard": []};
+    }
+    localStorage.setItem("bestScores", JSON.stringify(scores));
+    
     let conf = JSON.parse(localStorage.getItem("conf"));
     timer = 0;
     clearInterval(timerInterval);
@@ -238,9 +244,6 @@ const updateTimer = () => {
 
 const updateScore = (score) => {
     let scores = JSON.parse(localStorage.getItem("bestScores"));
-    if(scores == null){
-        scores = {"easy": [], "normal": [], "hard": []};
-    }
     let conf = JSON.parse(localStorage.getItem("conf"));
 
     if(conf["n"] == 9 &&  conf["m"] == 9 && conf["bombs"] == 10){
