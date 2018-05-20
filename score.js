@@ -1,3 +1,4 @@
+// get scores from localStorage
 const getScores = () => {
     let scores = JSON.parse(localStorage.getItem("bestScores"));
     let table = document.getElementById("scores");

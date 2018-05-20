@@ -1,5 +1,7 @@
+// convert form value to map configuration JSON ans store configuration in local storage
 const setConfig = () => {
     let conf = {};
+    // Store conf to be reuse next time
     localStorage.setItem("lastSubmittedConf", document.forms["difficulty"]["difficulty"].value);
 
     switch(document.forms["difficulty"]["difficulty"].value){
@@ -23,11 +25,14 @@ const setConfig = () => {
     localStorage.setItem("conf", JSON.stringify(conf));
 }
 
+// store a custom configuration in the local storage
 const setCustomConfig = () => {
+    // Gather form value
     let m = document.forms["customConf"]["nbRows"].value;
     let n = document.forms["customConf"]["nbCols"].value;
     let bombs = document.forms["customConf"]["nbBombs"].value;
 
+    // Validation for nbCols
     if(n > 1 && n <= 30){
         document.getElementById("nbCols").className = "form-control is-valid";
     }else{
@@ -35,6 +40,7 @@ const setCustomConfig = () => {
         return
     }
 
+    // Validation for nbRows
     if(m > 1 && m <= 24){
         document.getElementById("nbRows").className = "form-control is-valid";
     }else{
@@ -42,7 +48,9 @@ const setCustomConfig = () => {
         return 
     }
 
+    // Validation for nbBombs
     if(bombs > 1 && bombs < n*m){
+        // If all fields are valid, set conf in localStorage 
         localStorage.setItem("conf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
         localStorage.setItem("lastSubmittedCustomConf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
         document.getElementById("nbBombs").classList = "form-control is-valid";
@@ -51,6 +59,7 @@ const setCustomConfig = () => {
     }
 }
 
+// Display last used configuration at page reload
 const displayLastConf = () => {
     document.getElementById(localStorage.getItem("lastSubmittedConf")).checked = true;
 

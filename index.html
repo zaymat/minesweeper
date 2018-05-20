@@ -28,6 +28,7 @@
     <title>Minesweeper</title>
 </head>
 <body>
+    <!-- navbar -->
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1">Minesweeper</span>
     </nav>
@@ -46,14 +47,17 @@
         </li>
     </ul>
 
+    <!-- Display score (it's a modal) -->
     <div class="centered">
         <div id="score" class="score"></div>
     </div>
 
+    <!-- Display time -->
     <div class="row centered">
         <div id="timer" onclick="newGame()" class="mt-2 timer"></div>
     </div>
     
+    <!-- Display grid -->
     <div class="centered mb-3 mt-2">
         <div id="grid"></div>
     </div>
