@@ -206,7 +206,7 @@ const checkWin = (grid) => {
 }
 
 const newGame = () => {
-    let conf = JSON.parse(sessionStorage.getItem("conf"));
+    let conf = JSON.parse(localStorage.getItem("conf"));
     timer = 0;
     clearInterval(timerInterval);
 

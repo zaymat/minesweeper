@@ -1,6 +1,6 @@
 const setConfig = () => {
     let conf = {};
-    sessionStorage.setItem("lastSubmittedConf", document.forms["difficulty"]["difficulty"].value);
+    localStorage.setItem("lastSubmittedConf", document.forms["difficulty"]["difficulty"].value);
 
     switch(document.forms["difficulty"]["difficulty"].value){
         case "easy":
@@ -20,7 +20,7 @@ const setConfig = () => {
             break;
         
     }
-    sessionStorage.setItem("conf", JSON.stringify(conf));
+    localStorage.setItem("conf", JSON.stringify(conf));
 }
 
 const setCustomConfig = () => {
@@ -43,8 +43,8 @@ const setCustomConfig = () => {
     }
 
     if(bombs > 1 && bombs < n*m){
-        sessionStorage.setItem("conf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
-        sessionStorage.setItem("lastSubmittedCustomConf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
+        localStorage.setItem("conf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
+        localStorage.setItem("lastSubmittedCustomConf", JSON.stringify({"n":n, "m":m, "bombs":bombs}));
         document.getElementById("nbBombs").classList = "form-control is-valid";
     }else{
         document.getElementById("nbBombs").className = "form-control is-invalid";
@@ -52,9 +52,9 @@ const setCustomConfig = () => {
 }
 
 const displayLastConf = () => {
-    document.getElementById(sessionStorage.getItem("lastSubmittedConf")).checked = true;
+    document.getElementById(localStorage.getItem("lastSubmittedConf")).checked = true;
 
-    let lastConf = JSON.parse(sessionStorage.getItem("lastSubmittedCustomConf"));
+    let lastConf = JSON.parse(localStorage.getItem("lastSubmittedCustomConf"));
     document.getElementById("nbRows").value = lastConf["m"];
     document.getElementById("nbCols").value = lastConf["n"];
     document.getElementById("nbBombs").value = lastConf["bombs"];
